@@ -9,6 +9,7 @@ public class EnemyManager: MonoBehaviour
     [SerializeField] float enemySpawnDelay;
     private AudioSource audioSource;
     public AudioClip _smallEnemyDeathClip;
+    public AudioClip _playerDeathClip;
     public GameObject player;
     public GameObject smallEnemy;
     public GameObject largeEnemy;
@@ -52,10 +53,5 @@ public class EnemyManager: MonoBehaviour
         //Debug.Log("Entering enemySpawnTimer Coroutine");
         yield return new WaitForSeconds(enemySpawnDelay);
         canSpawn = true;
-    }
-
-    public void SmallEnemyDeathSound()
-    {
-        audioSource.PlayOneShot(_smallEnemyDeathClip);
     }
 }

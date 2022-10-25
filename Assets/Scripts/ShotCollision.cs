@@ -5,12 +5,12 @@ using UnityEngine;
 public class ShotCollision : MonoBehaviour
 {
     EnemyManager em;
-    EnemyAI enemyAI;
+    AudioManager am;
     // Start is called before the first frame update
     void Awake()
     {
         em = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
-
+        am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
     }
 
@@ -26,7 +26,7 @@ public class ShotCollision : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponent<EnemyAI>().EnemyHit();
-            em.SmallEnemyDeathSound();
+            am.SmallEnemyDeathSound();
             Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "Wall")

@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip _laser;
     public AudioClip _playerDeath;
+    private EnemyManager em;
+    AudioManager am;
 
     public GameObject bullet;
     private Rigidbody2D rb;
@@ -28,6 +30,8 @@ public class PlayerController : MonoBehaviour
         canShoot = true;
         myLight = GetComponent<Light2D>();
         audioSource = GetComponent<AudioSource>();
+        em = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
+        am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -80,18 +84,11 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            StartCoroutine(playerDeathDelay());
+            am.PlayerDeathSound();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             collision.gameObject.GetComponent<EnemyAI>().EnemyHit();
             Destroy(gameObject);
 
         }
-    }
-
-    IEnumerator playerDeathDelay()
-    {
-        audioSource.PlayOneShot(_playerDeath);
-        yield return new WaitForSeconds(2.0f);
-
     }
 }
