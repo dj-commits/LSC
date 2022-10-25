@@ -25,7 +25,8 @@ public class ShotCollision : MonoBehaviour
         //Debug.Log("Collision with: " + collision.gameObject.name);
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<EnemyAI>().EnemyDead();
+            collision.gameObject.GetComponent<EnemyAI>().EnemyHit();
+            em.SmallEnemyDeathSound();
             Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "Wall")

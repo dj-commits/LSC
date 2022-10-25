@@ -128,7 +128,7 @@ MonoBehaviour:
   enemyMovementTimer: 0
   intensityLength: 1
   _smallEnemyDeathClip: {fileID: 8300000, guid: 4204cc8be9c515f43844b44083165bdc, type: 3}
-  speed: 3
+  speed: 1
   canMove: 0
 --- !u!114 &8718077965292290564
 MonoBehaviour:

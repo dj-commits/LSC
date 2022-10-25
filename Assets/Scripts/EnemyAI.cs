@@ -33,9 +33,15 @@ public class EnemyAI : MonoBehaviour
         if (canMove)
         {
             transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-            canMove = false;
             StartCoroutine(enemyMovementDelay());
         }
+    }
+
+    public void EnemyHit()
+    {
+        canMove = false;
+        em.enemyCount--;        
+        Destroy(gameObject);
     }
 
     IEnumerator enemyMovementDelay()
@@ -43,13 +49,5 @@ public class EnemyAI : MonoBehaviour
         //Debug.Log("Entering enemyMovementDelay Coroutine");
         yield return new WaitForSeconds(enemyMovementTimer);
         canMove = true;
-    }
-
-    public void EnemyDead()
-    {
-        canMove = false;
-        em.enemyCount--;
-        //audioSource.PlayOneShot(_smallEnemyDeathClip);
-        Destroy(gameObject);
     }
 }

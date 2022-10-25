@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(playerDeathDelay());
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            collision.gameObject.GetComponent<EnemyAI>().EnemyDead();
+            collision.gameObject.GetComponent<EnemyAI>().EnemyHit();
             Destroy(gameObject);
 
         }
