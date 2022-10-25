@@ -5,10 +5,13 @@ using UnityEngine;
 public class ShotCollision : MonoBehaviour
 {
     EnemyManager em;
+    EnemyAI enemyAI;
     // Start is called before the first frame update
     void Awake()
     {
         em = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
+
+
     }
 
     // Update is called once per frame
@@ -22,10 +25,8 @@ public class ShotCollision : MonoBehaviour
         //Debug.Log("Collision with: " + collision.gameObject.name);
         if (collision.gameObject.tag == "Enemy")
         {
-            em.enemyCount--;
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<EnemyAI>().EnemyDead();
             Destroy(gameObject);
-
         }
         else if (collision.gameObject.tag == "Wall")
         {

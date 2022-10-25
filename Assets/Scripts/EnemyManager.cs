@@ -7,7 +7,7 @@ public class EnemyManager: MonoBehaviour
     [SerializeField] public int enemyCount;
     [SerializeField] bool canSpawn;
     [SerializeField] float enemySpawnDelay;
-    
+
     public GameObject player;
     public GameObject smallEnemy;
     public GameObject largeEnemy;
@@ -21,6 +21,7 @@ public class EnemyManager: MonoBehaviour
     {
         canSpawn = true;
         player = GameObject.Find("Player");
+
     }
 
     // Update is called once per frame
@@ -46,7 +47,7 @@ public class EnemyManager: MonoBehaviour
 
     IEnumerator enemySpawnTimer()
     {
-        Debug.Log("Entering enemySpawnTimer Coroutine");
+        //Debug.Log("Entering enemySpawnTimer Coroutine");
         yield return new WaitForSeconds(enemySpawnDelay);
         canSpawn = true;
     }

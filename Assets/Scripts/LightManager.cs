@@ -9,14 +9,15 @@ public class LightManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
         foreach (Light var in FindObjectsOfType(typeof(Light))) {
-            Debug.Log(var.name);
+            //Debug.Log(var.name);
             var.intensity = Mathf.PingPong(Time.time, intensityLength);
         }
     }

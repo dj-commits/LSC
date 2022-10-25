@@ -10,9 +10,10 @@ public class EnemyAI : MonoBehaviour
     Light2D myLight;
     [SerializeField] float enemyMovementTimer;
     [SerializeField] float intensityLength;
-
+    private AudioSource audioSource;
+    public AudioClip _smallEnemyDeathClip;
     [SerializeField] float speed;  
-    bool canMove;
+    public bool canMove;
     // Start is called before the first frame update
     void Awake()
     {
@@ -42,5 +43,13 @@ public class EnemyAI : MonoBehaviour
         //Debug.Log("Entering enemyMovementDelay Coroutine");
         yield return new WaitForSeconds(enemyMovementTimer);
         canMove = true;
+    }
+
+    public void EnemyDead()
+    {
+        canMove = false;
+        em.enemyCount--;
+        //audioSource.PlayOneShot(_smallEnemyDeathClip);
+        Destroy(gameObject);
     }
 }

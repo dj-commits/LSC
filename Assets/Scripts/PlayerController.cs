@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public bool canShoot;
     [SerializeField] float intensityLength;
 
+    private AudioSource audioSource;
+    public AudioClip _laser;
+    public AudioClip _playerDeath;
+
     public GameObject bullet;
     private Rigidbody2D rb;
     Light2D myLight;
@@ -23,6 +27,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         canShoot = true;
         myLight = GetComponent<Light2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -41,6 +46,7 @@ public class PlayerController : MonoBehaviour
                 Rigidbody2D bulletCloneRB2D = bulletClone.GetComponent<Rigidbody2D>();
                 Vector2 fwd = transform.up;
                 bulletCloneRB2D.AddForce(fwd * shotSpeed);
+                audioSource.PlayOneShot(_laser);
                 canShoot = false;
                 StartCoroutine(shootWaitTimer());
                 Destroy(bulletClone, 2);
@@ -74,9 +80,18 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Destroy(gameObject);
+            StartCoroutine(playerDeathDelay());
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            collision.gameObject.GetComponent<EnemyAI>().EnemyDead();
+            Destroy(gameObject);
 
         }
+    }
+
+    IEnumerator playerDeathDelay()
+    {
+        audioSource.PlayOneShot(_playerDeath);
+        yield return new WaitForSeconds(2.0f);
+
     }
 }
